@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile.build
+    volumes:
+      - ./Main.hs:/app/Main.hs
+      - ./src:/app/src
+      - ./cabal.config:/app/cabal.config
+      - ./haskell-heroku-docker.cabal:/app/haskell-heroku-docker.cabal
+      - ./build:/app/build
+      - cache_data:/app/dist
+      - cache_data:/root/.cabal
+      - cache_data:/root/.ghc
+
+  distributor:
+    build:
+      context: .
+      dockerfile: Dockerfile.dist
+    image: registry.heroku.com/haskell-free-deploy/web
+
+volumes:
+  cache_data:

@@ -1,0 +1,23 @@
+name:                haskell-heroku-docker
+version:             0.1.0.0
+author:              Hiroshi Ogawa
+maintainer:          hi.ogawa.zz@gmail.com
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+library
+  ghc-options:       -threaded -Wall -fno-warn-unused-do-bind -fno-warn-type-defaults
+  hs-source-dirs:    src
+  exposed-modules:   App
+  default-language:  Haskell2010
+  build-depends:     base
+                   , scotty
+                   , aeson
+
+executable production
+  ghc-options:       -static -threaded -Wall -fno-warn-unused-do-bind -fno-warn-type-defaults
+  main-is:           Main.hs
+  default-language:  Haskell2010
+  build-depends:     haskell-heroku-docker
+                   , base

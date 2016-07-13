@@ -1,0 +1,10 @@
+FROM haskell:7.10.3
+
+RUN cabal user-config update
+
+RUN mkdir -p /app
+WORKDIR /app
+
+CMD cabal update && \
+    cabal install && \
+    tar -czf build/production.tar.gz -C /root/.cabal/bin production

@@ -1,0 +1,9 @@
+FROM haskell:7.10.3
+
+RUN mkdir -p /root/.cabal/bin
+WORKDIR /root/.cabal/bin
+
+COPY build/production.tar.gz /root/.cabal/bin/production.tar.gz
+RUN tar -xzf production.tar.gz production
+
+CMD ./production
