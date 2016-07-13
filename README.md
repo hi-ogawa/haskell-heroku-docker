@@ -18,6 +18,7 @@ $ heroku plugins:install heroku-container-registry
 $ heroku login
 $ docker login --email=<heroku account email> --username=<heroku account email> --password=$(heroku auth:token) registry.heroku.com
 $ heroku apps:create haskell-free-deploy
+$ heroku addons:create heroku-redis -a haskell-free-deploy
 ```
 
 Continuous Update:
