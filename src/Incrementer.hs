@@ -15,19 +15,19 @@ increment key = do
   conn <- connect redisConnection
   runRedis conn $ do
     Right b <- exists keyBS
-    case b of
-      True  -> do
-        Right i <- incr keyBS
-        return i
-      False -> do
-        set keyBS "1"
-        return 1
+    if b
+    then do
+      Right i <- incr keyBS
+      return i
+    else do
+      set keyBS "1"
+      return 1
 
 redisConnection :: ConnectInfo
 redisConnection =
   let redisUrl = unsafePerformIO $ fromJust <$> lookupEnv "REDIS_URL"
       Just (URI _ (Just (URIAuth up host port)) _ _ _) = parseURI redisUrl
-      password = tail . init . snd . break (':' ==) $ up
+      password = tail . init . dropWhile (':' /=) $ up
       port' = read $ drop 1 port :: Int
   in
   defaultConnectInfo { connectHost = host

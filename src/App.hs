@@ -13,7 +13,7 @@ main = do
   S.scotty (read port) app
 
 app :: S.ScottyM ()
-app = do
+app =
   S.get (S.regex ".*") $ do
     path <- S.param "0"
     count <- S.liftAndCatchIO $ increment path
