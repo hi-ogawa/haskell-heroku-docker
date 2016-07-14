@@ -26,6 +26,6 @@ Continuous Update:
 ```
 $ docker-compose run --rm builder  # generate tarball of static linked executable
 $ docker-compose build distributor # extract executable inside of container and set as CMD
-$ docker push registry.heroku.com/haskell-free-deploy/web
+$ docker push registry.heroku.com/haskell-free-deploy/web # image is only 182.7 MB
 $ heroku open -a haskell-free-deploy
 ```
